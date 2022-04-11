@@ -101,19 +101,19 @@ public class Nave {
 		}
 
 		if(codigo == KeyEvent.VK_UP){
-			dy = -1;
+			dy = -2;
 		}
 		
 		if(codigo == KeyEvent.VK_DOWN){
-			dy = 1;
+			dy = 2;
 		}
 		
 		if(codigo == KeyEvent.VK_LEFT){
-			dx = -1;
+			dx = -2;
 		}
 		
 		if(codigo == KeyEvent.VK_RIGHT){
-			dx = 1;
+			dx = 2;
 		}
 		
 	}
