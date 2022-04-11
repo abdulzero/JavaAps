@@ -19,12 +19,19 @@ import javax.swing.Timer;
 public class Fase extends JPanel implements ActionListener{
     
     private Image fundo;
-    private Nave nave;
+    private Player player;
     private Timer timer;
 
     private boolean emJogo;
 
     private List<Inimigo> inimigos;
+
+    private List<Obstaculo> obstaculos;
+
+    private int[][] coordenadas2 = {{ 920, 200 }, { 900, 259 }, { 660, 50 }, { 540, 90 }, { 810, 220 },
+    { 860, 20 }, { 740, 180 }, { 820, 128 }, { 490, 170 }, { 700, 30 },
+    { 920, 300 }, { 856, 328 }, { 456, 320 } };
+
 
     // cords dos inimigos
     private int[][] coordenadas = { { 2380, 29 }, { 2600, 59 }, { 1380, 89 },
@@ -40,14 +47,15 @@ public class Fase extends JPanel implements ActionListener{
         setFocusable(true);
         setDoubleBuffered(true);
         addKeyListener(new TecladoAdapter());
-        ImageIcon referencia = new ImageIcon("res\\fundo.png");
+        ImageIcon referencia = new ImageIcon("res//fundo.png");
         fundo = referencia.getImage();
 
-        nave = new Nave();
+        player = new Player();
 
         emJogo = true;
 
         inicializaInimigos();
+        inicializaObstaculos();
 
         timer = new Timer(5, this);
         timer.start();
@@ -63,6 +71,15 @@ public class Fase extends JPanel implements ActionListener{
 
     }
 
+    public void inicializaObstaculos(){
+        obstaculos = new ArrayList<Obstaculo>();
+
+        for(int i = 0;i < coordenadas2.length; i++){
+            obstaculos.add(new Obstaculo(coordenadas2[i][0], coordenadas2[i][1]));
+        }
+
+    }
+
     public void paint(Graphics g){
 
         Graphics2D graficos = (Graphics2D) g;
@@ -70,9 +87,9 @@ public class Fase extends JPanel implements ActionListener{
 
         if(emJogo){
 
-            graficos.drawImage(nave.getImagem(),nave.getX(),nave.getY(), this);
+            graficos.drawImage(player.getImagem(),player.getX(),player.getY(), this);
 
-            List<Missel> misseis = nave.getMisseis();
+            List<Missel> misseis = player.getMisseis();
 
             for(int i = 0; i < misseis.size(); i++){
 
@@ -85,8 +102,15 @@ public class Fase extends JPanel implements ActionListener{
                 Inimigo in = (Inimigo) inimigos.get(i);
                 graficos.drawImage(in.getImagem(), in.getX(), in.getY(), this);
             }
+            for(int i = 0; i < obstaculos.size(); i++){
+
+                Obstaculo in = (Obstaculo) obstaculos.get(i);
+                graficos.drawImage(in.getImagem(), in.getX(), in.getY(), this);
+            }
+            
             graficos.setColor(Color.WHITE);
             graficos.drawString("INIMIGOS: " + inimigos.size(), 5, 15);
+            graficos.drawString("LIFE: " + player.getLife(), 5, 30);
 
         } else {
             ImageIcon fimJogo = new ImageIcon("res\\game_over.jpg");
@@ -104,7 +128,7 @@ public class Fase extends JPanel implements ActionListener{
             emJogo = false;
         }
 
-        List<Missel> misseis = nave.getMisseis();
+        List<Missel> misseis = player.getMisseis();
 
         for(int i = 0; i < misseis.size() ; i++){
 
@@ -128,8 +152,19 @@ public class Fase extends JPanel implements ActionListener{
             }
         }
 
+        for(int i = 0; i < obstaculos.size() ; i++){
 
-        nave.mexer();
+            Obstaculo in = (Obstaculo) obstaculos.get(i);
+
+            if(in.isVisivel()){
+                in.mexer();
+            } else {
+                obstaculos.remove(i);
+            }
+        }
+
+
+        player.mexer();
         checarColisoes();
         repaint();
 
@@ -137,8 +172,9 @@ public class Fase extends JPanel implements ActionListener{
 
     public void checarColisoes(){
 
-        Rectangle formaNave = nave.getBounds();
+        Rectangle formaPlayer = player.getBounds();
         Rectangle formaInimigo;
+        Rectangle formaObstaculo;
         Rectangle formaMissel;
 
         for(int i = 0; i < inimigos.size(); i++){
@@ -146,17 +182,37 @@ public class Fase extends JPanel implements ActionListener{
             Inimigo tempInimigo = inimigos.get(i);
             formaInimigo = tempInimigo.getBounds();
 
-            if(formaNave.intersects(formaInimigo)){
-                nave.setVisivel(false);
+            if(formaPlayer.intersects(formaInimigo)){
+                player.setLife(1);
+                if(player.getLife() == 0){
+                    player.setVisivel(false);
+                    emJogo = false;
+                }
                 tempInimigo.setVisivel(false);
-
-                emJogo = false;
             }
 
 
         }
 
-        List<Missel> misseis = nave.getMisseis();
+        for(int i = 0; i < obstaculos.size(); i++){
+            
+            Obstaculo tempObstaculo = obstaculos.get(i);
+            formaObstaculo = tempObstaculo.getBounds();
+
+            if(formaPlayer.intersects(formaObstaculo)){
+                player.setLife(1);
+                if(player.getLife() == 0){
+                    player.setVisivel(false);
+                    // emJogo = false;
+                }
+                tempObstaculo.setVisivel(false);
+
+            }
+
+
+        }
+
+        List<Missel> misseis = player.getMisseis();
 
         for(int i = 0; i < misseis.size(); i++){
 
@@ -182,12 +238,13 @@ public class Fase extends JPanel implements ActionListener{
 
         @Override
         public void keyPressed(KeyEvent e) {
-            nave.keyPressed(e);
+            player.keyPressed(e);
         }
 
         @Override
         public void keyReleased(KeyEvent e){
-            nave.keyReleased(e);
+            player.keyReleased(e);
         }
+        
     }
 }

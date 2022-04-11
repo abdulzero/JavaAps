@@ -8,20 +8,21 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
-public class Nave {
+public class Player {
 
 	private int x, y;
 	private int dx, dy;
 	private int altura, largura;
+	private int life = 3;
 	private boolean isVisivel;
 
 	private Image imagem;
 	
 	private List<Missel> misseis;
 	
-	public Nave(){
+	public Player(){
 		
-		ImageIcon referencia = new ImageIcon("res\\bike3.gif");
+		ImageIcon referencia = new ImageIcon("res//bike3.gif");
 		imagem = referencia.getImage();
 		
 		altura = imagem.getHeight(null);
@@ -32,6 +33,14 @@ public class Nave {
 		this.x = 100;
 		this.y = 100;
 		
+	}
+
+	public int getLife(){
+		return life;
+	}
+
+	public void setLife(int life){
+        this.life -= life;
 	}
 	
 	public void mexer(){
@@ -101,19 +110,19 @@ public class Nave {
 		}
 
 		if(codigo == KeyEvent.VK_UP){
-			dy = -2;
+			dy = -1;
 		}
 		
 		if(codigo == KeyEvent.VK_DOWN){
-			dy = 2;
+			dy = 1;
 		}
 		
 		if(codigo == KeyEvent.VK_LEFT){
-			dx = -2;
+			dx = -1;
 		}
 		
 		if(codigo == KeyEvent.VK_RIGHT){
-			dx = 2;
+			dx = 1;
 		}
 		
 	}

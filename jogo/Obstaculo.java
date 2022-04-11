@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
-public class Inimigo {
+public class Obstaculo {
 
     private Image imagem;
     private int x, y;
@@ -17,15 +17,15 @@ public class Inimigo {
 
     private static int contador = 0;
 
-    public Inimigo(int x, int y){
+    public Obstaculo(int x, int y){
         this.x = x;
         this.y = y;
 
         ImageIcon referencia;
         if(contador ++ % 3 == 0){
-            referencia = new ImageIcon("res//lixo_1.png");
+            referencia = new ImageIcon("res//pedra.png");
         }else{
-            referencia = new ImageIcon("res//lixo_2.png");
+            referencia = new ImageIcon("res//pedra.png");
         }
         imagem = referencia.getImage();
 
