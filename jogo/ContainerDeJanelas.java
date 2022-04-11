@@ -2,7 +2,6 @@
 package jogo;
 
 import javax.swing.JFrame;
-import javax.swing.JButton;
 
 // classe que vai gerar a janela do jogo
 
@@ -11,12 +10,11 @@ public class ContainerDeJanelas extends JFrame{
     // constructor 
 	public ContainerDeJanelas() {
 		
-        
-		add(new JButton("Teste"));
+        add(new Fase());
 		setTitle("Jogo APS");
-		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1000,1000);
+		setSize(500,500);
+		setLocationRelativeTo(null);
         setResizable(false);
 		setVisible(true);
 	}
