@@ -13,7 +13,7 @@ public class ContainerDeJanelas extends JFrame{
         add(new Fase());
 		setTitle("Jogo APS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(500,500);
+		setSize(500,400);
 		setLocationRelativeTo(null);
         setResizable(false);
 		setVisible(true);
