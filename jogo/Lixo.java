@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
-public class Inimigo {
+public class Lixo {
 
     private Image imagem;
     private int x, y;
@@ -17,7 +17,7 @@ public class Inimigo {
 
     private static int contador = 0;
 
-    public Inimigo(int x, int y){
+    public Lixo(int x, int y){
         this.x = x;
         this.y = y;
 
