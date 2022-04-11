@@ -36,23 +36,25 @@ public class Nave {
 	
 	public void mexer(){
 
-		x += dx; // 1 e 462
-		y += dy; // 1 e 340
+		x += dx; 
+		y += dy; 
+
+        System.out.println(this.x + "," + this.y);
 
 		if(this.x < 1){
 			x = 1;
 		}
 		
-		if(this.x > 462){
-			x = 462;
+		if(this.x > 424){
+			x = 424;
 		}
 		
 		if(this.y < 1){
 			y = 1;
 		}
 
-		if(this.y > 340){
-			y = 340;
+		if(this.y > 300){
+			y = 300;
 		}
 		
 	}
