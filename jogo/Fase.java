@@ -87,14 +87,6 @@ public class Fase extends JPanel implements ActionListener{
 
             graficos.drawImage(player.getImagem(),player.getX(),player.getY(), this);
 
-            List<Missel> misseis = player.getMisseis();
-
-            for(int i = 0; i < misseis.size(); i++){
-
-                Missel m = (Missel) misseis.get(i);
-                graficos.drawImage(m.getImagem(), m.getX(), m.getY(), this);
-            }
-
             for(int i = 0; i < lixos.size(); i++){
 
                 Lixo in = (Lixo) lixos.get(i);
@@ -124,19 +116,6 @@ public class Fase extends JPanel implements ActionListener{
 
         if(lixos.size() == 0){
             emJogo = false;
-        }
-
-        List<Missel> misseis = player.getMisseis();
-
-        for(int i = 0; i < misseis.size() ; i++){
-
-            Missel m = (Missel) misseis.get(i);
-
-            if(m.isVisivel()){
-                m.mexer();
-            } else {
-                misseis.remove(i);
-            }
         }
 
         for(int i = 0; i < lixos.size() ; i++){
@@ -173,7 +152,6 @@ public class Fase extends JPanel implements ActionListener{
         Rectangle formaPlayer = player.getBounds();
         Rectangle formaLixo;
         Rectangle formaObstaculo;
-        Rectangle formaMissel;
 
         for(int i = 0; i < lixos.size(); i++){
             
@@ -181,12 +159,7 @@ public class Fase extends JPanel implements ActionListener{
             formaLixo = tempLixo.getBounds();
 
             if(formaPlayer.intersects(formaLixo)){
-                player.setLife(1);
-                player.setImagem(player.getLife());
-                if(player.getLife() == 0){
-                    player.setVisivel(false);
-                    emJogo = false;
-                }
+                System.out.println("recolheu um lixo");
                 tempLixo.setVisivel(false);
             }
 
@@ -212,27 +185,6 @@ public class Fase extends JPanel implements ActionListener{
 
 
         }
-
-        List<Missel> misseis = player.getMisseis();
-
-        for(int i = 0; i < misseis.size(); i++){
-
-            Missel tempMissel = misseis.get(i);
-            formaMissel = tempMissel.getBounds();
-
-            for(int f = 0; f < lixos.size(); f++){
-
-                Lixo tempLixo = lixos.get(f);
-                formaLixo = tempLixo.getBounds();
-
-                if(formaMissel.intersects(formaLixo)){
-                    tempLixo.setVisivel(false);
-                    tempMissel.setVisivel(false);
-                }
-
-            }
-        }
-
     }
 
     private class TecladoAdapter extends KeyAdapter{

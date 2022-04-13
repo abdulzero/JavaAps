@@ -3,54 +3,51 @@ package jogo;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.ImageIcon;
 
 public class Player {
 
-	private int x, y;
-	private int dx, dy;
-	private int altura, largura;
-	private int life = 5;
-	private boolean isVisivel;
+	private int x, y; //posição
+	private int dx, dy; //movimentação
+	private int altura, largura; //altura e largura do player (relação com dimensões da imagem)
+	private int life = 5; //variavel vida
+	private boolean isVisivel; //o jogador é visivel?
 
-	private Image imagem;
-	
-	private List<Missel> misseis;
-	
-	public Player(){
+	private Image imagem; //imagem do personagem
 		
-		ImageIcon referencia = new ImageIcon("res//bike3.gif");
-		imagem = referencia.getImage();
+	public Player(){ //constructor do jogador
 		
-		altura = imagem.getHeight(null);
-		largura = imagem.getWidth(null);
+		ImageIcon referencia = new ImageIcon("res//bike3.gif"); //instancia a referencia
+		imagem = referencia.getImage(); //atribui a imagem
 		
-		misseis = new ArrayList<Missel>();
+		altura = imagem.getHeight(null); //altura
+		largura = imagem.getWidth(null); //largura -- ambas baseadas nas dimensões da imagem.
 		
-		this.x = 100;
-		this.y = 100;
+		
+		this.x = 100; 
+		this.y = 100; // - posições x e y iniciais do jogador
 		
 	}
 
-	public int getLife(){
+	public int getLife(){ //metodo que retorna a vida
 		return life;
 	}
 
-	public void setLife(int life){
+	public void setLife(int life){ //metodo que seta a vida
         this.life -= life;
 	}
 	
-	public void mexer(){
+	public void mexer(){ //metodo da movimentação
 
-		x += dx; 
-		y += dy; 
+		x += dx;
+		y += dy; //dx e dy são os comandos do jogador atribuidos a variavel de sua posição 
 
-        System.out.println(this.x + "," + this.y);
+        System.out.println(this.x + "," + this.y); 
 
-		if(this.x < 1){
+		// a seguir, validação se o personagem exceder o limite da tela:
+
+		if(this.x < 1){ 
 			x = 1;
 		}
 		
@@ -65,22 +62,20 @@ public class Player {
 		if(this.y > 300){
 			y = 300;
 		}
+
+		// ends 
 		
 	}
 	
-	public List<Missel> getMisseis() {
-		return misseis;
-	}
-
-	public int getX() {
+	public int getX() { // pega a posição x
 		return x;
 	}
 	
-	public int getY() {	
+	public int getY() {	// pega a posição y
 		return y;
 	}
 	
-	public Image getImagem() {
+	public Image getImagem() { // pega a imagem
 		return imagem;
 	}
 
@@ -120,10 +115,6 @@ public class Player {
 		this.isVisivel = isVisivel;
 	}
 	
-	public void atira(){
-		this.misseis.add(new Missel(x+largura, y + altura/2 ));
-	}
-
 	public Rectangle getBounds(){
 		return new Rectangle(x, y, largura, altura);
 	}
@@ -134,7 +125,7 @@ public class Player {
 		int codigo = tecla.getKeyCode();
 		
 		if(codigo == KeyEvent.VK_SPACE){
-			atira();
+			// atira();
 		}
 
 		if(codigo == KeyEvent.VK_UP){
