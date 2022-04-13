@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
-public class Missel {
+public class Obstaculo {
 
     private Image imagem;
     private int x, y;
@@ -13,13 +13,20 @@ public class Missel {
     private boolean isVisivel;
 
     private static final int LARGURA_TELA = 500;
-    private static final int VELOCIDADE = 2;
+    private static final int VELOCIDADE = 1;
 
-    public Missel(int x, int y){
+    private static int contador = 0;
+
+    public Obstaculo(int x, int y){
         this.x = x;
         this.y = y;
 
-        ImageIcon referencia = new ImageIcon("res//jato.png");
+        ImageIcon referencia;
+        if(contador ++ % 3 == 0){
+            referencia = new ImageIcon("res//pedra.png");
+        }else{
+            referencia = new ImageIcon("res//pedra.png");
+        }
         imagem = referencia.getImage();
 
         this.largura = imagem.getWidth(null);
@@ -30,11 +37,11 @@ public class Missel {
 
     public void mexer(){
 
-        this.x += VELOCIDADE;
-        if(this.x > LARGURA_TELA){
-            isVisivel = false;
+        if(this.x < 0){
+            this.x = LARGURA_TELA;
+        } else {
+            this.x -= VELOCIDADE;
         }
-
     }
 
     public boolean isVisivel() {

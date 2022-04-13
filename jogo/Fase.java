@@ -19,46 +19,61 @@ import javax.swing.Timer;
 public class Fase extends JPanel implements ActionListener{
     
     private Image fundo;
-    private Nave nave;
+    private Player player;
     private Timer timer;
 
     private boolean emJogo;
 
-    private List<Inimigo> inimigos;
+    private List<Lixo> lixos;
+
+    private List<Obstaculo> obstaculos;
+
+    private int[][] coordenadas2 = {{ 920, 200 }, { 900, 259 }, { 660, 50 }, { 540, 90 }, { 810, 220 },
+    { 860, 20 }, { 740, 180 }, 
+    // { 820, 128 }, { 490, 170 }, { 700, 30 },
+    { 920, 300 }, { 856, 328 }, { 456, 320 } };
+
 
     // cords dos inimigos
     private int[][] coordenadas = { { 2380, 29 }, { 2600, 59 }, { 1380, 89 },
         { 780, 109 }, { 580, 139 }, { 880, 239 }, { 790, 259 },
         { 760, 50 }, { 790, 150 }, { 1980, 209 }, { 560, 45 }, { 510, 70 },
-        { 930, 159 }, { 590, 80 }, { 530, 60 }, { 940, 59 }, { 990, 30 },
-        { 920, 200 }, { 900, 259 }, { 660, 50 }, { 540, 90 }, { 810, 220 },
-        { 860, 20 }, { 740, 180 }, { 820, 128 }, { 490, 170 }, { 700, 30 },
-        { 920, 300 }, { 856, 328 }, { 456, 320 } };
+        { 930, 159 }, { 590, 80 }, { 530, 60 }, { 940, 59 }, { 990, 30 },};
 
     public Fase(){
 
         setFocusable(true);
         setDoubleBuffered(true);
         addKeyListener(new TecladoAdapter());
-        ImageIcon referencia = new ImageIcon("res\\fundo.png");
+        ImageIcon referencia = new ImageIcon("res//fundo.png");
         fundo = referencia.getImage();
 
-        nave = new Nave();
+        player = new Player();
 
-        emJogo = true;
+        emJogo = false;
 
-        inicializaInimigos();
+        inicializaLixos();
+        inicializaObstaculos();
 
         timer = new Timer(5, this);
         timer.start();
 
     }
 
-    public void inicializaInimigos(){
-        inimigos = new ArrayList<Inimigo>();
+    public void inicializaLixos(){
+        lixos = new ArrayList<Lixo>();
 
         for(int i = 0;i < coordenadas.length; i++){
-            inimigos.add(new Inimigo(coordenadas[i][0], coordenadas[i][1]));
+            lixos.add(new Lixo(coordenadas[i][0], coordenadas[i][1]));
+        }
+
+    }
+
+    public void inicializaObstaculos(){
+        obstaculos = new ArrayList<Obstaculo>();
+
+        for(int i = 0;i < coordenadas2.length; i++){
+            obstaculos.add(new Obstaculo(coordenadas2[i][0], coordenadas2[i][1]));
         }
 
     }
@@ -70,9 +85,9 @@ public class Fase extends JPanel implements ActionListener{
 
         if(emJogo){
 
-            graficos.drawImage(nave.getImagem(),nave.getX(),nave.getY(), this);
+            graficos.drawImage(player.getImagem(),player.getX(),player.getY(), this);
 
-            List<Missel> misseis = nave.getMisseis();
+            List<Missel> misseis = player.getMisseis();
 
             for(int i = 0; i < misseis.size(); i++){
 
@@ -80,16 +95,23 @@ public class Fase extends JPanel implements ActionListener{
                 graficos.drawImage(m.getImagem(), m.getX(), m.getY(), this);
             }
 
-            for(int i = 0; i < inimigos.size(); i++){
+            for(int i = 0; i < lixos.size(); i++){
 
-                Inimigo in = (Inimigo) inimigos.get(i);
+                Lixo in = (Lixo) lixos.get(i);
                 graficos.drawImage(in.getImagem(), in.getX(), in.getY(), this);
             }
+            for(int i = 0; i < obstaculos.size(); i++){
+
+                Obstaculo in = (Obstaculo) obstaculos.get(i);
+                graficos.drawImage(in.getImagem(), in.getX(), in.getY(), this);
+            }
+            
             graficos.setColor(Color.WHITE);
-            graficos.drawString("INIMIGOS: " + inimigos.size(), 5, 15);
+            graficos.drawString("LIXOS NA ESTRADA: " + lixos.size(), 5, 15);
+            graficos.drawString("LIFE: " + player.getLife(), 5, 30);
 
         } else {
-            ImageIcon fimJogo = new ImageIcon("res\\game_over.jpg");
+            ImageIcon fimJogo = new ImageIcon("res//game_over.jpg");
             graficos.drawImage(fimJogo.getImage(), 0,0,null);
         }
 
@@ -100,11 +122,11 @@ public class Fase extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent arg0) {
 
-        if(inimigos.size() == 0){
+        if(lixos.size() == 0){
             emJogo = false;
         }
 
-        List<Missel> misseis = nave.getMisseis();
+        List<Missel> misseis = player.getMisseis();
 
         for(int i = 0; i < misseis.size() ; i++){
 
@@ -117,19 +139,30 @@ public class Fase extends JPanel implements ActionListener{
             }
         }
 
-        for(int i = 0; i < inimigos.size() ; i++){
+        for(int i = 0; i < lixos.size() ; i++){
 
-            Inimigo in = (Inimigo) inimigos.get(i);
+            Lixo in = (Lixo) lixos.get(i);
 
             if(in.isVisivel()){
                 in.mexer();
             } else {
-                inimigos.remove(i);
+                lixos.remove(i);
+            }
+        }
+
+        for(int i = 0; i < obstaculos.size() ; i++){
+
+            Obstaculo in = (Obstaculo) obstaculos.get(i);
+
+            if(in.isVisivel()){
+                in.mexer();
+            } else {
+                obstaculos.remove(i);
             }
         }
 
 
-        nave.mexer();
+        player.mexer();
         checarColisoes();
         repaint();
 
@@ -137,39 +170,63 @@ public class Fase extends JPanel implements ActionListener{
 
     public void checarColisoes(){
 
-        Rectangle formaNave = nave.getBounds();
-        Rectangle formaInimigo;
+        Rectangle formaPlayer = player.getBounds();
+        Rectangle formaLixo;
+        Rectangle formaObstaculo;
         Rectangle formaMissel;
 
-        for(int i = 0; i < inimigos.size(); i++){
+        for(int i = 0; i < lixos.size(); i++){
             
-            Inimigo tempInimigo = inimigos.get(i);
-            formaInimigo = tempInimigo.getBounds();
+            Lixo tempLixo = lixos.get(i);
+            formaLixo = tempLixo.getBounds();
 
-            if(formaNave.intersects(formaInimigo)){
-                nave.setVisivel(false);
-                tempInimigo.setVisivel(false);
-
-                emJogo = false;
+            if(formaPlayer.intersects(formaLixo)){
+                player.setLife(1);
+                player.setImagem(player.getLife());
+                if(player.getLife() == 0){
+                    player.setVisivel(false);
+                    emJogo = false;
+                }
+                tempLixo.setVisivel(false);
             }
 
 
         }
 
-        List<Missel> misseis = nave.getMisseis();
+        for(int i = 0; i < obstaculos.size(); i++){
+            
+            Obstaculo tempObstaculo = obstaculos.get(i);
+            formaObstaculo = tempObstaculo.getBounds();
+
+            if(formaPlayer.intersects(formaObstaculo)){
+                player.setLife(1);
+                player.setImagem(player.getLife());
+                if(player.getLife() == 0){
+                    player.setVisivel(false);
+                    emJogo = false;
+                }
+                tempObstaculo.setVisivel(false);
+                // add classe de animação dos obstaculos quebrando ao colidir
+
+            }
+
+
+        }
+
+        List<Missel> misseis = player.getMisseis();
 
         for(int i = 0; i < misseis.size(); i++){
 
             Missel tempMissel = misseis.get(i);
             formaMissel = tempMissel.getBounds();
 
-            for(int f = 0; f < inimigos.size(); f++){
+            for(int f = 0; f < lixos.size(); f++){
 
-                Inimigo tempInimigo = inimigos.get(f);
-                formaInimigo = tempInimigo.getBounds();
+                Lixo tempLixo = lixos.get(f);
+                formaLixo = tempLixo.getBounds();
 
-                if(formaMissel.intersects(formaInimigo)){
-                    tempInimigo.setVisivel(false);
+                if(formaMissel.intersects(formaLixo)){
+                    tempLixo.setVisivel(false);
                     tempMissel.setVisivel(false);
                 }
 
@@ -181,13 +238,24 @@ public class Fase extends JPanel implements ActionListener{
     private class TecladoAdapter extends KeyAdapter{
 
         @Override
-        public void keyPressed(KeyEvent e) {
-            nave.keyPressed(e);
-        }
+		public void keyPressed(KeyEvent e) {
+
+			if(emJogo == false){
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                    emJogo = true;
+                    player = new Player();
+                    inicializaLixos();
+                }
+            }
+
+			
+			player.keyPressed(e);
+		}
 
         @Override
         public void keyReleased(KeyEvent e){
-            nave.keyReleased(e);
+            player.keyReleased(e);
         }
+        
     }
 }
