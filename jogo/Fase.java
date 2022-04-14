@@ -23,6 +23,7 @@ public class Fase extends JPanel implements ActionListener{
     private Timer timer;
 
     private boolean emJogo;
+    private boolean venceu;
 
     private List<Lixo> lixos;
 
@@ -30,7 +31,6 @@ public class Fase extends JPanel implements ActionListener{
 
     private int[][] coordenadas2 = {{ 920, 200 }, { 900, 259 }, { 660, 50 }, { 540, 90 }, { 810, 220 },
     { 860, 20 }, { 740, 180 }, 
-    // { 820, 128 }, { 490, 170 }, { 700, 30 },
     { 920, 300 }, { 856, 328 }, { 456, 320 } };
 
 
@@ -84,6 +84,8 @@ public class Fase extends JPanel implements ActionListener{
         graficos.drawImage(fundo, 0, 0, null);
 
         if(emJogo){
+            
+            venceu = false;
 
             graficos.drawImage(player.getImagem(),player.getX(),player.getY(), this);
 
@@ -103,8 +105,14 @@ public class Fase extends JPanel implements ActionListener{
             graficos.drawString("LIFE: " + player.getLife(), 5, 30);
 
         } else {
-            ImageIcon fimJogo = new ImageIcon("res//game_over.jpg");
-            graficos.drawImage(fimJogo.getImage(), 0,0,null);
+            if(venceu == true){
+               System.out.println("okokokokokokook");
+               graficos.setColor(Color.WHITE);
+               graficos.drawString("VOCÊ VENCEU!!", 5, 15);
+            } else{
+                ImageIcon fimJogo = new ImageIcon("res//game_over.jpg");
+                graficos.drawImage(fimJogo.getImage(), 0,0,null);    
+            }
         }
 
         g.dispose();
@@ -113,6 +121,10 @@ public class Fase extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
+
+        if(player.getLife() > 0 & lixos.size() == 0){
+           venceu = true;
+        }
 
         if(lixos.size() == 0){
             emJogo = false;

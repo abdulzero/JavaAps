@@ -11,7 +11,7 @@ public class Player {
 	private int x, y; //posição
 	private int dx, dy; //movimentação
 	private int altura, largura; //altura e largura do player (relação com dimensões da imagem)
-	private int life = 5; //variavel vida
+	private int life = 3; //variavel vida
 	private boolean isVisivel; //o jogador é visivel?
 
 	private Image imagem; //imagem do personagem
@@ -43,7 +43,7 @@ public class Player {
 		x += dx;
 		y += dy; //dx e dy são os comandos do jogador atribuidos a variavel de sua posição 
 
-        System.out.println(this.x + "," + this.y); 
+        // System.out.println(this.x + "," + this.y); 
 
 		// a seguir, validação se o personagem exceder o limite da tela:
 
