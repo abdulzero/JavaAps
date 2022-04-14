@@ -38,6 +38,9 @@ public class Player {
 
 	public void setLife(int life){ //metodo que seta a vida
         this.life = life;
+		if(this.life > 3){
+			this.life = 3;
+		}
 	}
 	
 	public void mexer(){ //metodo da movimentação

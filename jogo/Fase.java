@@ -111,9 +111,9 @@ public class Fase extends JPanel implements ActionListener{
                graficos.drawString("VOCÊ VENCEU!!", 5, 15);
             } else{
                 ImageIcon fimJogo = new ImageIcon("res//game_over.jpg");
-                graficos.drawImage(fimJogo.getImage(), 0,0,null);
+                graficos.drawImage(fimJogo.getImage(), -5,-50,null);
                 graficos.setColor(Color.WHITE);
-                graficos.drawString("Press Enter to try again", 180, 240);    
+                graficos.drawString("Press Enter to try again", 180, 250);    
             }
         }
 
