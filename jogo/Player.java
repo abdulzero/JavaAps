@@ -13,6 +13,7 @@ public class Player {
 	private int altura, largura; //altura e largura do player (relação com dimensões da imagem)
 	private int life = 3; //variavel vida
 	private boolean isVisivel; //o jogador é visivel?
+	private int velocidade;
 
 	private Image imagem; //imagem do personagem
 		
@@ -24,7 +25,8 @@ public class Player {
 		altura = imagem.getHeight(null); //altura
 		largura = imagem.getWidth(null); //largura -- ambas baseadas nas dimensões da imagem.
 		
-		
+		velocidade = 2;
+
 		this.x = 100; 
 		this.y = 100; // - posições x e y iniciais do jogador
 		
@@ -124,24 +126,20 @@ public class Player {
 		
 		int codigo = tecla.getKeyCode();
 		
-		if(codigo == KeyEvent.VK_SPACE){
-			// atira();
-		}
-
 		if(codigo == KeyEvent.VK_UP){
-			dy = -1;
+			dy = velocidade * -1;
 		}
 		
 		if(codigo == KeyEvent.VK_DOWN){
-			dy = 1;
+			dy = velocidade;
 		}
 		
 		if(codigo == KeyEvent.VK_LEFT){
-			dx = -1;
+			dx = velocidade *-1;
 		}
 		
 		if(codigo == KeyEvent.VK_RIGHT){
-			dx = 1;
+			dx = velocidade;
 		}
 		
 	}
@@ -150,21 +148,15 @@ public class Player {
 		
 		int codigo = tecla.getKeyCode();
 		
-		if(codigo == KeyEvent.VK_UP){
+		if(codigo == KeyEvent.VK_UP || codigo == KeyEvent.VK_DOWN){
 			dy = 0;
 		}
  
-		if(codigo == KeyEvent.VK_DOWN){
-			dy = 0;
-		}
 		
-		if(codigo == KeyEvent.VK_LEFT){
+		if(codigo == KeyEvent.VK_LEFT || codigo == KeyEvent.VK_RIGHT){
 			dx = 0;
 		}
 		
-		if(codigo == KeyEvent.VK_RIGHT){
-			dx = 0;
-		}
 		
 	}
 	
