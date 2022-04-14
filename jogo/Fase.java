@@ -111,7 +111,9 @@ public class Fase extends JPanel implements ActionListener{
                graficos.drawString("VOCÊ VENCEU!!", 5, 15);
             } else{
                 ImageIcon fimJogo = new ImageIcon("res//game_over.jpg");
-                graficos.drawImage(fimJogo.getImage(), 0,0,null);    
+                graficos.drawImage(fimJogo.getImage(), 0,0,null);
+                graficos.setColor(Color.WHITE);
+                graficos.drawString("Press Enter to try again", 180, 240);    
             }
         }
 
@@ -122,12 +124,9 @@ public class Fase extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent arg0) {
 
-        if(player.getLife() > 0 & lixos.size() == 0){
+        if(player.getLife() > 0 && lixos.size() == 0){
            venceu = true;
-        }
-
-        if(lixos.size() == 0){
-            emJogo = false;
+           emJogo = false;
         }
 
         for(int i = 0; i < lixos.size() ; i++){
@@ -184,9 +183,9 @@ public class Fase extends JPanel implements ActionListener{
             formaObstaculo = tempObstaculo.getBounds();
 
             if(formaPlayer.intersects(formaObstaculo)){
-                player.setLife(1);
+                player.setLife(player.getLife()- tempObstaculo.getDano());
                 player.setImagem(player.getLife());
-                if(player.getLife() == 0){
+                if(player.getLife() < 1){
                     player.setVisivel(false);
                     emJogo = false;
                 }
@@ -206,9 +205,11 @@ public class Fase extends JPanel implements ActionListener{
 
 			if(emJogo == false){
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    emJogo = true;
+                    
                     player = new Player();
                     inicializaLixos();
+                    inicializaObstaculos();
+                    emJogo = true;
                 }
             }
 

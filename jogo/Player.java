@@ -37,7 +37,7 @@ public class Player {
 	}
 
 	public void setLife(int life){ //metodo que seta a vida
-        this.life -= life;
+        this.life = life;
 	}
 	
 	public void mexer(){ //metodo da movimentação
