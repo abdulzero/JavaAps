@@ -10,18 +10,20 @@ public abstract class Objeto {
     protected Image imagem;
     protected int x, y;
     protected int largura, altura;
-    private boolean isVisivel;
+    protected boolean isVisivel;
     protected static final int LARGURA_TELA = 500;
     protected static int velocidade;
 
     protected int gerador;
 
+    // Construtores
     public Objeto(){
+        this(100, 100);
+    }
+
+    public Objeto(int x, int y){
         this.x = x;
         this.y = y;
-
-        this.largura = imagem.getWidth(null);
-        this.altura = imagem.getHeight(null);
 
         isVisivel = true;
     }
@@ -37,7 +39,9 @@ public abstract class Objeto {
 
     public void gerarImagem(String path){
         ImageIcon referencia = new ImageIcon(path); //instancia a referencia
-		imagem = referencia.getImage(); //atribui a imagem
+		this.imagem = referencia.getImage(); //atribui a 
+        this.largura = imagem.getWidth(null);
+        this.altura = imagem.getHeight(null);
 
     }
     public boolean isVisivel() {
@@ -58,6 +62,8 @@ public abstract class Objeto {
     public int getY(){
         return y;
     }
+
+     // tratar colisão vida etc
     public Rectangle getBounds(){
         return new Rectangle(x, y, largura, altura);
     }

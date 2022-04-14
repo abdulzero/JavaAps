@@ -7,84 +7,40 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 
-public class Obstaculo {
+public class Obstaculo extends Objeto{
 
-    private Image imagem;
-    private int x, y;
-    private int largura, altura;
+    //Atributos
     private int dano; // Qtd de vidas que o obstaculo irá tirar do player
-    private boolean isVisivel;
-
-    private static final int LARGURA_TELA = 500;
-    private static int velocidade;
-
     private int gerador;
 
+    // Construtor
     public Obstaculo(int x, int y){
+        super(x, y);
         Random random = new Random();
         gerador = random.nextInt(6);
 
         ImageIcon referencia;
         if(gerador == 2){
             dano = 5;
-            referencia = new ImageIcon("res\\tree.png");
+            gerarImagem("res\\tree.png");
         }
         else if(gerador == 5){
             dano = -1;
-            referencia = new ImageIcon("res\\heart.png");
+            gerarImagem("res\\heart.png");
         }
         else{
             dano = 1;
-            referencia = new ImageIcon("res//pedra.png");
+            gerarImagem("res//pedra.png");
         }
-        imagem = referencia.getImage();
 
-        this.x = x;
-        this.y = y;
-
-        velocidade = 1;
-
-        this.largura = imagem.getWidth(null);
-        this.altura = imagem.getHeight(null);
-
-        isVisivel = true;
+        velocidade = 1; // Mantém pois poderemos mudar futuramente
+      
     }
 
-    public void mexer(){
-
-        if(this.x < 0){
-            this.x = LARGURA_TELA;
-        } else {
-            this.x -= velocidade;
-        }
-    }
-
-    public boolean isVisivel() {
-        return isVisivel;
-    }
-
-    public void setVisivel(boolean isVisivel){
-        this.isVisivel = isVisivel;
-    }
-
-    public Image getImagem() {
-        return imagem;
-    }
-
-    public int getX(){
-        return x;
-    }
-    public int getY(){
-        return y;
-    }
+    // Getter
     public int getDano(){
         return dano;
     }
-
-
-    // tratar colisão vida etc
-    public Rectangle getBounds(){
-        return new Rectangle(x, y, largura, altura);
-    }
+ 
         
 }
