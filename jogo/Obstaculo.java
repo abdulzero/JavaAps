@@ -16,11 +16,9 @@ public class Obstaculo {
     private boolean isVisivel;
 
     private static final int LARGURA_TELA = 500;
-    private static final int VELOCIDADE = 1;
+    private static int velocidade;
 
     private int gerador;
-
-    private static int contador = 0;
 
     public Obstaculo(int x, int y){
         Random random = new Random();
@@ -44,6 +42,8 @@ public class Obstaculo {
         this.x = x;
         this.y = y;
 
+        velocidade = 1;
+
         this.largura = imagem.getWidth(null);
         this.altura = imagem.getHeight(null);
 
@@ -55,7 +55,7 @@ public class Obstaculo {
         if(this.x < 0){
             this.x = LARGURA_TELA;
         } else {
-            this.x -= VELOCIDADE;
+            this.x -= velocidade;
         }
     }
 

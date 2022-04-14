@@ -1,40 +1,22 @@
 package jogo;
 
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.util.Random;
-
 import javax.swing.ImageIcon;
+import java.awt.Image;
+import java.util.Random;
+import java.awt.Rectangle;
 
-public class Lixo {
+public abstract class Objeto {
 
-    private Image imagem;
-    private int x, y;
-    private int largura, altura;
+    protected Image imagem;
+    protected int x, y;
+    protected int largura, altura;
     private boolean isVisivel;
+    protected static final int LARGURA_TELA = 500;
+    protected static int velocidade;
 
-    private static final int LARGURA_TELA = 500;
-    private static int velocidade;
+    protected int gerador;
 
-    private int gerador;
-
-    private static int contador = 0;
-
-    public Lixo(int x, int y){
-
-        ImageIcon referencia;
-        Random random = new Random();
-        gerador = random.nextInt(3);
-
-        if(gerador == 1){
-            referencia = new ImageIcon("res//lixo_1.png");
-        }else{
-            referencia = new ImageIcon("res//lixo_2.png");
-        }
-        imagem = referencia.getImage();
-
-        velocidade = 1;
-
+    public Objeto(){
         this.x = x;
         this.y = y;
 
@@ -53,6 +35,11 @@ public class Lixo {
         }
     }
 
+    public void gerarImagem(String path){
+        ImageIcon referencia = new ImageIcon(path); //instancia a referencia
+		imagem = referencia.getImage(); //atribui a imagem
+
+    }
     public boolean isVisivel() {
         return isVisivel;
     }
@@ -71,10 +58,9 @@ public class Lixo {
     public int getY(){
         return y;
     }
-
-    // tratar colisão vida etc
     public Rectangle getBounds(){
         return new Rectangle(x, y, largura, altura);
     }
-        
+
+    
 }
