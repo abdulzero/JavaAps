@@ -119,7 +119,8 @@ public class Fase extends JPanel implements ActionListener{
                 ImageIcon fimJogo = new ImageIcon("res//game_over.jpg");
                 graficos.drawImage(fimJogo.getImage(), -5,-50,null);
                 graficos.setColor(Color.WHITE);
-                graficos.drawString("Press Enter to try again", 180, 250);    
+                graficos.drawString("Press Enter to try again", 180, 250);  
+                fase = 1;  
             }
         }
 
@@ -211,7 +212,7 @@ public class Fase extends JPanel implements ActionListener{
 
 			if(emJogo == false){
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    
+                    fase = (venceu)? ++fase: 1; // A cada vitoria a haverá um incremento na fase, caso perca, a fase irá retornar para 1 (a fase influencia na velocidade dos obstaculos e do lixo)
                     player = new Player();
                     inicializaLixos();
                     inicializaObstaculos();

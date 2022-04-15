@@ -19,12 +19,13 @@ public class Obstaculo extends Objeto{
         Random random = new Random();
         gerador = random.nextInt(6);
         if(gerador == 2){
-            dano = 5;
-            gerarImagem("res\\tree.png");
+            dano = 3;
+            gerarImagem("res\\tree2.png");
         }
         else if(gerador == 5){
             dano = -1;
             gerarImagem("res\\heart.png");
+
         }
         else{
             dano = 1;
