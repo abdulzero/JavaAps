@@ -14,12 +14,10 @@ public class Obstaculo extends Objeto{
     private int gerador;
 
     // Construtor
-    public Obstaculo(int x, int y){
-        super(x, y);
+    public Obstaculo(int x, int y, int velocidade){
+        super(x, y, velocidade);
         Random random = new Random();
         gerador = random.nextInt(6);
-
-        ImageIcon referencia;
         if(gerador == 2){
             dano = 5;
             gerarImagem("res\\tree.png");
@@ -33,7 +31,6 @@ public class Obstaculo extends Objeto{
             gerarImagem("res//pedra.png");
         }
 
-        velocidade = 1; // Mantém pois poderemos mudar futuramente
       
     }
 

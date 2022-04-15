@@ -6,29 +6,13 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 
-public class Player {
+public class Player extends Objeto{
 
-	private int x, y; //posição
 	private int dx, dy; //movimentação
-	private int altura, largura; //altura e largura do player (relação com dimensões da imagem)
 	private int life = 3; //variavel vida
-	private boolean isVisivel; //o jogador é visivel?
-	private int velocidade;
-
-	private Image imagem; //imagem do personagem
 		
 	public Player(){ //constructor do jogador
-		
-		ImageIcon referencia = new ImageIcon("res//bike3.gif"); //instancia a referencia
-		imagem = referencia.getImage(); //atribui a imagem
-		
-		altura = imagem.getHeight(null); //altura
-		largura = imagem.getWidth(null); //largura -- ambas baseadas nas dimensões da imagem.
-		
-		velocidade = 2;
-
-		this.x = 100; 
-		this.y = 100; // - posições x e y iniciais do jogador
+		gerarImagem("res//bike3.gif"); //instancia a referencia
 		
 	}
 
@@ -43,13 +27,13 @@ public class Player {
 		}
 	}
 	
+	@Override
 	public void mexer(){ //metodo da movimentação
 
 		x += dx;
 		y += dy; //dx e dy são os comandos do jogador atribuidos a variavel de sua posição 
 
         // System.out.println(this.x + "," + this.y); 
-
 		// a seguir, validação se o personagem exceder o limite da tela:
 
 		if(this.x < 1){ 
@@ -72,17 +56,6 @@ public class Player {
 		
 	}
 	
-	public int getX() { // pega a posição x
-		return x;
-	}
-	
-	public int getY() {	// pega a posição y
-		return y;
-	}
-	
-	public Image getImagem() { // pega a imagem
-		return imagem;
-	}
 
 	public void setImagem(int status) {
 		// classe que muda o tamanho do personagem caso ele perca vida, por enquanto ele só perde, add depois ganho
@@ -112,17 +85,7 @@ public class Player {
 		}
 	}
 
-	public boolean isVisivel() {
-		return isVisivel;
-	}
-	
-	public void setVisivel(boolean isVisivel) {
-		this.isVisivel = isVisivel;
-	}
-	
-	public Rectangle getBounds(){
-		return new Rectangle(x, y, largura, altura);
-	}
+
 	
 	
 	public void keyPressed(KeyEvent tecla){

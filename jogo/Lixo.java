@@ -8,8 +8,8 @@ import javax.swing.ImageIcon;
 
 public class Lixo extends Objeto{
 
-    public Lixo(int x, int y){
-        super(x, y);
+    public Lixo(int x, int y, int velocidade){
+        super(x, y, velocidade);
 
         Random random = new Random();
         gerador = random.nextInt(3);
@@ -19,8 +19,8 @@ public class Lixo extends Objeto{
         }else{
             gerarImagem("res//lixo_2.png");
         }
-
-        velocidade = 1;   
     }
+
+
         
 }

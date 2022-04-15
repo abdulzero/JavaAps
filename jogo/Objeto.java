@@ -12,21 +12,23 @@ public abstract class Objeto {
     protected int largura, altura;
     protected boolean isVisivel;
     protected static final int LARGURA_TELA = 500;
-    protected static int velocidade;
+    protected int velocidade;
 
     protected int gerador;
 
     // Construtores
     public Objeto(){
-        this(100, 100);
+        this(100, 100, 2); // - posições x e y iniciais
     }
 
-    public Objeto(int x, int y){
+    public Objeto(int x, int y, int velocidade){
         this.x = x;
         this.y = y;
-
+        this.velocidade = velocidade;
         isVisivel = true;
     }
+
+    // Métodos
 
     public void mexer(){
 

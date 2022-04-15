@@ -12,11 +12,14 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.management.JMException;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class Fase extends JPanel implements ActionListener{
+
+    private int fase;
     
     private Image fundo;
     private Player player;
@@ -42,6 +45,8 @@ public class Fase extends JPanel implements ActionListener{
 
     public Fase(){
 
+        fase = 1; // O nivel da fase está correlacionado com a velocidade dos objetos;
+
         setFocusable(true);
         setDoubleBuffered(true);
         addKeyListener(new TecladoAdapter());
@@ -64,7 +69,7 @@ public class Fase extends JPanel implements ActionListener{
         lixos = new ArrayList<Lixo>();
 
         for(int i = 0;i < coordenadas.length; i++){
-            lixos.add(new Lixo(coordenadas[i][0], coordenadas[i][1]));
+            lixos.add(new Lixo(coordenadas[i][0], coordenadas[i][1], fase));
         }
 
     }
@@ -73,10 +78,11 @@ public class Fase extends JPanel implements ActionListener{
         obstaculos = new ArrayList<Obstaculo>();
 
         for(int i = 0;i < coordenadas2.length; i++){
-            obstaculos.add(new Obstaculo(coordenadas2[i][0], coordenadas2[i][1]));
+            obstaculos.add(new Obstaculo(coordenadas2[i][0], coordenadas2[i][1], fase));
         }
 
     }
+ 
 
     public void paint(Graphics g){
 
