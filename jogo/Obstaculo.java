@@ -20,11 +20,11 @@ public class Obstaculo extends Objeto{
         gerador = random.nextInt(6);
         if(gerador == 2){       // 33% de chance de gerar uma árvore
             dano = 3;           //hit kill
-            gerarImagem("res\\tree2.png");
+            gerarImagem("res//tree2.png");
         }
         else if(gerador == 5){  // 16.666% de chance de gerar o coração
             dano = -1;          // restaura 1 ponto de vida
-            gerarImagem("res\\heart.png");
+            gerarImagem("res//heart.png");
 
         }
         else{                  // 50% de chance de gerar pedra

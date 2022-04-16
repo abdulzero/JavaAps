@@ -40,16 +40,16 @@ public class Player extends Objeto{
 			x = 1;
 		}
 		
-		if(this.x > 424){
-			x = 424;
+		if(this.x > 1220){
+			x = 1220;
 		}
 		
 		if(this.y < 1){
 			y = 1;
 		}
 
-		if(this.y > 300){
-			y = 300;
+		if(this.y > 600){
+			y = 600;
 		}
 
 		// ends 
@@ -62,25 +62,27 @@ public class Player extends Objeto{
 		switch(status){
 			case 5:
 			ImageIcon referencia5 = new ImageIcon("res//bike3.gif");
-			this.imagem = referencia5.getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT);
+			this.imagem = referencia5.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 			break;
 			case 4:
 			ImageIcon referencia4 = new ImageIcon("res//bike3.gif");
-			this.imagem = referencia4.getImage().getScaledInstance(55, 55, Image.SCALE_DEFAULT);
+			this.imagem = referencia4.getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT);
 			break;
 			case 3:
 			ImageIcon referencia3 = new ImageIcon("res//bike3.gif");
-			this.imagem = referencia3.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+			this.imagem = referencia3.getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT);
 			break;
 			case 2:
 			ImageIcon referencia2 = new ImageIcon("res//bike3.gif");
-			this.imagem = referencia2.getImage().getScaledInstance(45, 45, Image.SCALE_DEFAULT);
+			this.imagem = referencia2.getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT);
 			break;
 			case 1:
 			ImageIcon referencia1 = new ImageIcon("res//bike3.gif");
-			this.imagem = referencia1.getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT);
+			this.imagem = referencia1.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT);
 			break;
 			default:
+			ImageIcon imgDefault = new ImageIcon("res//bike3.gif");
+			this.imagem = imgDefault.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
 			break;
 		}
 	}

@@ -32,16 +32,25 @@ public class Fase extends JPanel implements ActionListener{
 
     private List<Obstaculo> obstaculos;
 
-    private int[][] coordenadas2 = {{ 920, 200 }, { 900, 259 }, { 660, 50 }, { 540, 90 }, { 810, 220 },
-    { 860, 20 }, { 740, 180 }, 
-    { 920, 300 }, { 856, 328 }, { 456, 320 } };
+    private int[][] coordenadas2 = 
+     {{20,450},{300, 480}, {320, 1000}, {500, 564}, {600,350},{750, 900}, {900,1}, {950, 500}, {1100, 320}, {950, 100}, {750, 200},
+     {600,30},{100,200}, {500,256}
+};
 
 
-    // cords dos inimigos
-    private int[][] coordenadas = { { 2380, 29 }, { 2600, 59 }, { 1380, 89 },
-        { 780, 109 }, { 580, 139 }, { 880, 239 }, { 790, 259 },
-        { 760, 50 }, { 790, 150 }, { 1980, 209 }, { 560, 45 }, { 510, 70 },
-        { 930, 159 }, { 590, 80 }, { 530, 60 }, { 940, 59 }, { 990, 30 },};
+    // cords dos lixos
+    private int[][] coordenadas = {
+        {20,300},
+        {400,200},
+        {320,550},
+        {200,290},
+        {300,1},
+        {750,390},
+        {900,564},
+        {1100,600},
+        {1300,100},
+        {1300, 400},
+    };
 
     public Fase(){
 
@@ -109,18 +118,18 @@ public class Fase extends JPanel implements ActionListener{
             graficos.setColor(Color.WHITE);
             graficos.drawString("LIXOS NA ESTRADA: " + lixos.size(), 5, 15);
             graficos.drawString("LIFE: " + player.getLife(), 5, 30);
-            graficos.drawString("PHASE: " + fase, 400, 15);
+            graficos.drawString("FASE: " + fase, 400, 15);
 
         } else {
             if(venceu == true){
-               System.out.println("okokokokokokook");
+               System.out.println("ok");
                graficos.setColor(Color.WHITE);
                graficos.drawString("VOCÊ VENCEU!!", 5, 15);
             } else{
                 ImageIcon fimJogo = new ImageIcon("res//game_over.jpg");
                 graficos.drawImage(fimJogo.getImage(), -5,-50,null);
                 graficos.setColor(Color.WHITE);
-                graficos.drawString("Press Enter to try again", 180, 250);  
+                graficos.drawString("Pressione Enter para jogar denovo", 580, 500);  
                 fase = 1;  
             }
         }

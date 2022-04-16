@@ -13,7 +13,7 @@ public abstract class Objeto {
     protected int x, y;
     protected int largura, altura;
     protected boolean isVisivel;
-    protected static final int LARGURA_TELA = 500;
+    protected static final int LARGURA_TELA = 1280;
     protected int velocidade;
 
     protected int gerador;
