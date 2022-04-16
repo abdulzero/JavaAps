@@ -109,6 +109,7 @@ public class Fase extends JPanel implements ActionListener{
             graficos.setColor(Color.WHITE);
             graficos.drawString("LIXOS NA ESTRADA: " + lixos.size(), 5, 15);
             graficos.drawString("LIFE: " + player.getLife(), 5, 30);
+            graficos.drawString("PHASE: " + fase, 400, 15);
 
         } else {
             if(venceu == true){
