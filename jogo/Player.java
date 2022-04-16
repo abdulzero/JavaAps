@@ -13,7 +13,7 @@ public class Player extends Objeto{
 		
 	public Player(){ //constructor do jogador
 		life = 3;
-		gerarImagem("res//bike3.gif"); //instancia a referencia
+		gerarImagem("res//mlk.gif"); //instancia a referencia
 		
 	}
 
