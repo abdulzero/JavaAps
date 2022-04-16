@@ -12,17 +12,21 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.management.JMException;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class Fase extends JPanel implements ActionListener{
+
+    private int fase;
     
     private Image fundo;
     private Player player;
     private Timer timer;
 
     private boolean emJogo;
+    private boolean venceu;
 
     private List<Lixo> lixos;
 
@@ -30,7 +34,6 @@ public class Fase extends JPanel implements ActionListener{
 
     private int[][] coordenadas2 = {{ 920, 200 }, { 900, 259 }, { 660, 50 }, { 540, 90 }, { 810, 220 },
     { 860, 20 }, { 740, 180 }, 
-    // { 820, 128 }, { 490, 170 }, { 700, 30 },
     { 920, 300 }, { 856, 328 }, { 456, 320 } };
 
 
@@ -41,6 +44,8 @@ public class Fase extends JPanel implements ActionListener{
         { 930, 159 }, { 590, 80 }, { 530, 60 }, { 940, 59 }, { 990, 30 },};
 
     public Fase(){
+
+        fase = 1; // O nivel da fase está correlacionado com a velocidade dos objetos;
 
         setFocusable(true);
         setDoubleBuffered(true);
@@ -64,7 +69,7 @@ public class Fase extends JPanel implements ActionListener{
         lixos = new ArrayList<Lixo>();
 
         for(int i = 0;i < coordenadas.length; i++){
-            lixos.add(new Lixo(coordenadas[i][0], coordenadas[i][1]));
+            lixos.add(new Lixo(coordenadas[i][0], coordenadas[i][1], fase));
         }
 
     }
@@ -73,10 +78,11 @@ public class Fase extends JPanel implements ActionListener{
         obstaculos = new ArrayList<Obstaculo>();
 
         for(int i = 0;i < coordenadas2.length; i++){
-            obstaculos.add(new Obstaculo(coordenadas2[i][0], coordenadas2[i][1]));
+            obstaculos.add(new Obstaculo(coordenadas2[i][0], coordenadas2[i][1], fase));
         }
 
     }
+ 
 
     public void paint(Graphics g){
 
@@ -84,16 +90,10 @@ public class Fase extends JPanel implements ActionListener{
         graficos.drawImage(fundo, 0, 0, null);
 
         if(emJogo){
+            
+            venceu = false;
 
             graficos.drawImage(player.getImagem(),player.getX(),player.getY(), this);
-
-            List<Missel> misseis = player.getMisseis();
-
-            for(int i = 0; i < misseis.size(); i++){
-
-                Missel m = (Missel) misseis.get(i);
-                graficos.drawImage(m.getImagem(), m.getX(), m.getY(), this);
-            }
 
             for(int i = 0; i < lixos.size(); i++){
 
@@ -109,10 +109,20 @@ public class Fase extends JPanel implements ActionListener{
             graficos.setColor(Color.WHITE);
             graficos.drawString("LIXOS NA ESTRADA: " + lixos.size(), 5, 15);
             graficos.drawString("LIFE: " + player.getLife(), 5, 30);
+            graficos.drawString("PHASE: " + fase, 400, 15);
 
         } else {
-            ImageIcon fimJogo = new ImageIcon("res//game_over.jpg");
-            graficos.drawImage(fimJogo.getImage(), 0,0,null);
+            if(venceu == true){
+               System.out.println("okokokokokokook");
+               graficos.setColor(Color.WHITE);
+               graficos.drawString("VOCÊ VENCEU!!", 5, 15);
+            } else{
+                ImageIcon fimJogo = new ImageIcon("res//game_over.jpg");
+                graficos.drawImage(fimJogo.getImage(), -5,-50,null);
+                graficos.setColor(Color.WHITE);
+                graficos.drawString("Press Enter to try again", 180, 250);  
+                fase = 1;  
+            }
         }
 
         g.dispose();
@@ -122,21 +132,9 @@ public class Fase extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent arg0) {
 
-        if(lixos.size() == 0){
-            emJogo = false;
-        }
-
-        List<Missel> misseis = player.getMisseis();
-
-        for(int i = 0; i < misseis.size() ; i++){
-
-            Missel m = (Missel) misseis.get(i);
-
-            if(m.isVisivel()){
-                m.mexer();
-            } else {
-                misseis.remove(i);
-            }
+        if(player.getLife() > 0 && lixos.size() == 0){
+           venceu = true;
+           emJogo = false;
         }
 
         for(int i = 0; i < lixos.size() ; i++){
@@ -173,7 +171,6 @@ public class Fase extends JPanel implements ActionListener{
         Rectangle formaPlayer = player.getBounds();
         Rectangle formaLixo;
         Rectangle formaObstaculo;
-        Rectangle formaMissel;
 
         for(int i = 0; i < lixos.size(); i++){
             
@@ -181,12 +178,7 @@ public class Fase extends JPanel implements ActionListener{
             formaLixo = tempLixo.getBounds();
 
             if(formaPlayer.intersects(formaLixo)){
-                player.setLife(1);
-                player.setImagem(player.getLife());
-                if(player.getLife() == 0){
-                    player.setVisivel(false);
-                    emJogo = false;
-                }
+                System.out.println("recolheu um lixo");
                 tempLixo.setVisivel(false);
             }
 
@@ -199,9 +191,9 @@ public class Fase extends JPanel implements ActionListener{
             formaObstaculo = tempObstaculo.getBounds();
 
             if(formaPlayer.intersects(formaObstaculo)){
-                player.setLife(1);
+                player.setLife(player.getLife()- tempObstaculo.getDano());
                 player.setImagem(player.getLife());
-                if(player.getLife() == 0){
+                if(player.getLife() < 1){
                     player.setVisivel(false);
                     emJogo = false;
                 }
@@ -212,27 +204,6 @@ public class Fase extends JPanel implements ActionListener{
 
 
         }
-
-        List<Missel> misseis = player.getMisseis();
-
-        for(int i = 0; i < misseis.size(); i++){
-
-            Missel tempMissel = misseis.get(i);
-            formaMissel = tempMissel.getBounds();
-
-            for(int f = 0; f < lixos.size(); f++){
-
-                Lixo tempLixo = lixos.get(f);
-                formaLixo = tempLixo.getBounds();
-
-                if(formaMissel.intersects(formaLixo)){
-                    tempLixo.setVisivel(false);
-                    tempMissel.setVisivel(false);
-                }
-
-            }
-        }
-
     }
 
     private class TecladoAdapter extends KeyAdapter{
@@ -242,9 +213,11 @@ public class Fase extends JPanel implements ActionListener{
 
 			if(emJogo == false){
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    emJogo = true;
+                    fase = (venceu)? ++fase: 1; // A cada vitoria a haverá um incremento na fase, caso perca, a fase irá retornar para 1 (a fase influencia na velocidade dos obstaculos e do lixo)
                     player = new Player();
                     inicializaLixos();
+                    inicializaObstaculos();
+                    emJogo = true;
                 }
             }
 

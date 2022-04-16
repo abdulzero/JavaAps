@@ -2,70 +2,25 @@ package jogo;
 
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 
-public class Lixo {
+public class Lixo extends Objeto{
 
-    private Image imagem;
-    private int x, y;
-    private int largura, altura;
-    private boolean isVisivel;
+    public Lixo(int x, int y, int velocidade){
+        super(x, y, velocidade);
 
-    private static final int LARGURA_TELA = 500;
-    private static final int VELOCIDADE = 1;
+        Random random = new Random();
+        gerador = random.nextInt(3);
 
-    private static int contador = 0;
-
-    public Lixo(int x, int y){
-        this.x = x;
-        this.y = y;
-
-        ImageIcon referencia;
-        if(contador ++ % 3 == 0){
-            referencia = new ImageIcon("res//lixo_1.png");
+        if(gerador == 1){     // Mantive a probabilidade original 
+        gerarImagem("res//lixo_1.png");
         }else{
-            referencia = new ImageIcon("res//lixo_2.png");
-        }
-        imagem = referencia.getImage();
-
-        this.largura = imagem.getWidth(null);
-        this.altura = imagem.getHeight(null);
-
-        isVisivel = true;
-    }
-
-    public void mexer(){
-
-        if(this.x < 0){
-            this.x = LARGURA_TELA;
-        } else {
-            this.x -= VELOCIDADE;
+            gerarImagem("res//lixo_2.png");
         }
     }
 
-    public boolean isVisivel() {
-        return isVisivel;
-    }
 
-    public void setVisivel(boolean isVisivel){
-        this.isVisivel = isVisivel;
-    }
-
-    public Image getImagem() {
-        return imagem;
-    }
-
-    public int getX(){
-        return x;
-    }
-    public int getY(){
-        return y;
-    }
-
-    // tratar colisão vida etc
-    public Rectangle getBounds(){
-        return new Rectangle(x, y, largura, altura);
-    }
         
 }
