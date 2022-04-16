@@ -60,7 +60,7 @@ public class Player extends Objeto{
 
 	public void setImagem(int status) {
 		// classe que muda o tamanho do personagem caso ele perca vida, por enquanto ele só perde, add depois ganho
-		int area = 60 - ((5 - status) * 5);
+		int area = 70 - ((5 - status) * 5); // Fórmula do tamanho
 		imagem = imagem.getScaledInstance(area, area, imagem.SCALE_DEFAULT);
 	}
 	
