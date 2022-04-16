@@ -14,7 +14,7 @@ public class Lixo extends Objeto{
         Random random = new Random();
         gerador = random.nextInt(3);
 
-        if(gerador == 1){
+        if(gerador == 1){     // Mantive a probabilidade original 
         gerarImagem("res//lixo_1.png");
         }else{
             gerarImagem("res//lixo_2.png");

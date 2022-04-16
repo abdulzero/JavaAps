@@ -1,3 +1,5 @@
+// Classe abstrata que será o molde para todos os objetos que se deslocam e interagem entre si
+
 package jogo;
 
 import javax.swing.ImageIcon;

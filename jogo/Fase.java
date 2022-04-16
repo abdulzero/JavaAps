@@ -55,7 +55,7 @@ public class Fase extends JPanel implements ActionListener{
 
         player = new Player();
 
-        emJogo = true;
+        emJogo = false;
 
         inicializaLixos();
         inicializaObstaculos();

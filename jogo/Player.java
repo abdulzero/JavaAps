@@ -22,12 +22,12 @@ public class Player extends Objeto{
 
 	public void setLife(int life){ //metodo que seta a vida
         this.life = life;
-		if(this.life > 3){
+		if(this.life > 3){ // Teto de vida
 			this.life = 3;
 		}
 	}
 	
-	@Override
+	@Override // Comportamente polimorfico
 	public void mexer(){ //metodo da movimentação
 
 		x += dx;
