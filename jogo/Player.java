@@ -59,35 +59,9 @@ public class Player extends Objeto{
 
 	public void setImagem(int status) {
 		// classe que muda o tamanho do personagem caso ele perca vida, por enquanto ele só perde, add depois ganho
-		switch(status){
-			case 5:
-			ImageIcon referencia5 = new ImageIcon("res//bike3.gif");
-			this.imagem = referencia5.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
-			break;
-			case 4:
-			ImageIcon referencia4 = new ImageIcon("res//bike3.gif");
-			this.imagem = referencia4.getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT);
-			break;
-			case 3:
-			ImageIcon referencia3 = new ImageIcon("res//bike3.gif");
-			this.imagem = referencia3.getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT);
-			break;
-			case 2:
-			ImageIcon referencia2 = new ImageIcon("res//bike3.gif");
-			this.imagem = referencia2.getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT);
-			break;
-			case 1:
-			ImageIcon referencia1 = new ImageIcon("res//bike3.gif");
-			this.imagem = referencia1.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT);
-			break;
-			default:
-			ImageIcon imgDefault = new ImageIcon("res//bike3.gif");
-			this.imagem = imgDefault.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
-			break;
-		}
+		int area = 100 - ((5 - status) * 20);
+		imagem = imagem.getScaledInstance(area, area, imagem.SCALE_DEFAULT);
 	}
-
-
 	
 	
 	public void keyPressed(KeyEvent tecla){
