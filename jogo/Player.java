@@ -9,9 +9,10 @@ import javax.swing.ImageIcon;
 public class Player extends Objeto{
 
 	private int dx, dy; //movimentação
-	private int life = 3; //variavel vida
+	private int life; //variavel vida
 		
 	public Player(){ //constructor do jogador
+		life = 3;
 		gerarImagem("res//bike3.gif"); //instancia a referencia
 		
 	}
@@ -55,11 +56,11 @@ public class Player extends Objeto{
 		// ends 
 		
 	}
-	
+
 
 	public void setImagem(int status) {
 		// classe que muda o tamanho do personagem caso ele perca vida, por enquanto ele só perde, add depois ganho
-		int area = 100 - ((5 - status) * 20);
+		int area = 60 - ((5 - status) * 5);
 		imagem = imagem.getScaledInstance(area, area, imagem.SCALE_DEFAULT);
 	}
 	
