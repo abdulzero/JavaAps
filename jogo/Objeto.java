@@ -16,8 +16,6 @@ public abstract class Objeto {
     protected static final int LARGURA_TELA = 1280;
     protected int velocidade;
 
-    protected int gerador;
-
     // Construtores
     public Objeto(){
         this(100, 100, 2); // - posições x e y iniciais

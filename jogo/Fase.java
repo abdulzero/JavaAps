@@ -118,7 +118,7 @@ public class Fase extends JPanel implements ActionListener{
             graficos.setColor(Color.WHITE);
             graficos.drawString("LIXOS NA ESTRADA: " + lixos.size(), 5, 15);
             graficos.drawString("LIFE: " + player.getLife(), 5, 30);
-            graficos.drawString("FASE: " + fase, 400, 15);
+            graficos.drawString("FASE: " + fase, 1200, 15);
 
         } else {
             if(venceu == true){
@@ -129,7 +129,7 @@ public class Fase extends JPanel implements ActionListener{
                 ImageIcon fimJogo = new ImageIcon("res//game_over.jpg");
                 graficos.drawImage(fimJogo.getImage(), -5,-50,null);
                 graficos.setColor(Color.WHITE);
-                graficos.drawString("Pressione Enter para jogar denovo", 580, 500);  
+                graficos.drawString("Pressione Enter para jogar denovo", 540, 500);  
                 fase = 1;  
             }
         }
