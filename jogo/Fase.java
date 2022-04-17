@@ -135,14 +135,14 @@ public class Fase extends JPanel implements ActionListener{
         } else {
             if(venceu){
                System.out.println("ok");
-               graficos.drawString("VOCÊ VENCEU!!", 5, 20);
+               graficos.drawString("VOCÊ VENCEU!! APERTE ENTER E VÁ PARA PRÓXIMA FASE!", 5, 20);
             }
             else if (iniciou == false){
               
               graficos.drawString("ESCOLHA SEU AVATAR", 540, 100);
-              graficos.drawImage((Image) new ImageIcon("res//fotodomlk.png").getImage(),800, 200, null);
+              graficos.drawImage((Image) new ImageIcon("res//boy.png").getImage(),800, 200, null);
               graficos.drawString("APERTE B", 840, 430);
-              graficos.drawImage((Image) new ImageIcon("res//fotodamina.png").getImage(),280, 200, null);
+              graficos.drawImage((Image) new ImageIcon("res//girl.png").getImage(),280, 200, null);
               graficos.drawString("APERTE G", 320, 430);
             } 
             else {
@@ -207,7 +207,6 @@ public class Fase extends JPanel implements ActionListener{
             formaLixo = tempLixo.getBounds();
 
             if(formaPlayer.intersects(formaLixo)){
-                System.out.println("recolheu um lixo");
                 tempLixo.setVisivel(false);
             }
 
@@ -227,7 +226,6 @@ public class Fase extends JPanel implements ActionListener{
                     emJogo = false;
                 }
                 tempObstaculo.setVisivel(false);
-                // add classe de animação dos obstaculos quebrando ao colidir
 
             }
 
@@ -242,11 +240,11 @@ public class Fase extends JPanel implements ActionListener{
             int code = e.getKeyCode();
             if (!emJogo && !iniciou){
                 if (code == KeyEvent.VK_B){
-                    avatar = "res//mlk.gif";
+                    avatar = "res//bike_boy.gif";
                     inicializarJogo();
                 }
                 else if (code == KeyEvent.VK_G){
-                    avatar = "res//bike3.gif";
+                    avatar = "res//bike_girl.gif";
                     inicializarJogo();
                 }
                 
