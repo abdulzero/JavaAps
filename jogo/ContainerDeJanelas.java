@@ -12,9 +12,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 
+
 // classe que vai gerar a janela do jogo
 
 public class ContainerDeJanelas extends JFrame{
+	
 
     // constructor 
 	public ContainerDeJanelas() {
@@ -41,6 +43,7 @@ public class ContainerDeJanelas extends JFrame{
 			}
 		});
 		
+		
 		menu.add(sobre);
 		menu.add(new JSeparator());
 		menu.add(sair);
@@ -48,7 +51,6 @@ public class ContainerDeJanelas extends JFrame{
 		barraMenu.add(menu);
 		
 		setJMenuBar(barraMenu);
-		
         add(new Fase());
 		setTitle("Jogo APS");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,6 +58,8 @@ public class ContainerDeJanelas extends JFrame{
 		setLocationRelativeTo(null);
         setResizable(false);
 		setVisible(true);
+
+		
 	}
 	
 	public static void main(String[] args) {
