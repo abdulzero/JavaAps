@@ -11,9 +11,10 @@ public class Player extends Objeto{
 	private int dx, dy; //movimentação
 	private int life; //variavel vida
 		
-	public Player(){ //constructor do jogador
+	public Player(String path){ //constructor do jogador
+		super(path);
 		life = 3;
-		gerarImagem("res//mlk.gif"); //instancia a referencia
+		
 		
 	}
 

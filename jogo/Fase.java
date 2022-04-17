@@ -9,13 +9,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.management.JMException;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import java.awt.Font;
+
 
 public class Fase extends JPanel implements ActionListener{
 
@@ -25,10 +26,11 @@ public class Fase extends JPanel implements ActionListener{
     private Player player;
     private Timer timer;
 
-    private boolean emJogo;
-    private boolean venceu;
+    private boolean venceu, emJogo, iniciou;
 
     private List<Lixo> lixos;
+
+    private String avatar;
 
     private List<Obstaculo> obstaculos;
 
@@ -62,15 +64,17 @@ public class Fase extends JPanel implements ActionListener{
         ImageIcon referencia = new ImageIcon("res//fundo.png");
         fundo = referencia.getImage();
 
-        player = new Player();
-
+        iniciou = false;
         emJogo = false;
 
         inicializaLixos();
         inicializaObstaculos();
 
+        player = new Player("");
         timer = new Timer(5, this);
         timer.start();
+
+        
 
     }
 
@@ -91,12 +95,21 @@ public class Fase extends JPanel implements ActionListener{
         }
 
     }
+    public void inicializarJogo(){
+        player = new Player(avatar);
+        inicializaLixos();
+        inicializaObstaculos();
+        iniciou = true;
+        emJogo = true;
+    }
  
 
     public void paint(Graphics g){
 
         Graphics2D graficos = (Graphics2D) g;
         graficos.drawImage(fundo, 0, 0, null);
+        graficos.setColor(Color.WHITE);
+        graficos.setFont(new Font("Arial Black", Font.PLAIN, 18));;
 
         if(emJogo){
             
@@ -115,21 +128,28 @@ public class Fase extends JPanel implements ActionListener{
                 graficos.drawImage(in.getImagem(), in.getX(), in.getY(), this);
             }
             
-            graficos.setColor(Color.WHITE);
-            graficos.drawString("LIXOS NA ESTRADA: " + lixos.size(), 5, 15);
-            graficos.drawString("LIFE: " + player.getLife(), 5, 30);
-            graficos.drawString("FASE: " + fase, 1200, 15);
+            graficos.drawString("LIXOS NA ESTRADA: " + lixos.size(), 5, 20);
+            graficos.drawString("LIFE: " + player.getLife(), 5, 40);
+            graficos.drawString("FASE: " + fase, 1160, 20);
 
         } else {
-            if(venceu == true){
+            if(venceu){
                System.out.println("ok");
-               graficos.setColor(Color.WHITE);
-               graficos.drawString("VOCÊ VENCEU!!", 5, 15);
-            } else{
+               graficos.drawString("VOCÊ VENCEU!!", 5, 20);
+            }
+            else if (iniciou == false){
+              
+              graficos.drawString("ESCOLHA SEU AVATAR", 540, 100);
+              graficos.drawImage((Image) new ImageIcon("res//fotodomlk.png").getImage(),800, 200, null);
+              graficos.drawString("APERTE B", 840, 430);
+              graficos.drawImage((Image) new ImageIcon("res//fotodamina.png").getImage(),280, 200, null);
+              graficos.drawString("APERTE G", 320, 430);
+            } 
+            else {
                 ImageIcon fimJogo = new ImageIcon("res//game_over.jpg");
                 graficos.drawImage(fimJogo.getImage(), -5,-50,null);
                 graficos.setColor(Color.WHITE);
-                graficos.drawString("Pressione Enter para jogar denovo", 540, 500);  
+                graficos.drawString("Pressione Enter para jogar denovo", 480, 500);  
                 fase = 1;  
             }
         }
@@ -219,14 +239,26 @@ public class Fase extends JPanel implements ActionListener{
 
         @Override
 		public void keyPressed(KeyEvent e) {
-
-			if(emJogo == false){
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+            int code = e.getKeyCode();
+            if (!emJogo && !iniciou){
+                if (code == KeyEvent.VK_B){
+                    avatar = "res//mlk.gif";
+                    inicializarJogo();
+                }
+                else if (code == KeyEvent.VK_G){
+                    avatar = "res//bike3.gif";
+                    inicializarJogo();
+                }
+                
+            }
+			else if(!emJogo /*&& iniciou*/){
+                if(code == KeyEvent.VK_ENTER){
                     fase = (venceu)? ++fase: 1; // A cada vitoria a haverá um incremento na fase, caso perca, a fase irá retornar para 1 (a fase influencia na velocidade dos obstaculos e do lixo)
-                    player = new Player();
                     inicializaLixos();
                     inicializaObstaculos();
+                    iniciou = true;
                     emJogo = true;
+                    player = new Player(avatar);
                 }
             }
 

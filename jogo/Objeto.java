@@ -17,8 +17,9 @@ public abstract class Objeto {
     protected int velocidade;
 
     // Construtores
-    public Objeto(){
+    public Objeto(String path){
         this(100, 100, 2); // - posições x e y iniciais
+        gerarImagem(path); //instancia a referencia
     }
 
     public Objeto(int x, int y, int velocidade){
