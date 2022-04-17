@@ -138,12 +138,14 @@ public class Fase extends JPanel implements ActionListener{
                graficos.drawString("VOCÊ VENCEU!! APERTE ENTER E VÁ PARA PRÓXIMA FASE!", 5, 20);
             }
             else if (iniciou == false){
-              
-              graficos.drawString("ESCOLHA SEU AVATAR", 540, 100);
-              graficos.drawImage((Image) new ImageIcon("res//boy.png").getImage(),800, 200, null);
-              graficos.drawString("APERTE B", 840, 430);
-              graficos.drawImage((Image) new ImageIcon("res//girl.png").getImage(),280, 200, null);
-              graficos.drawString("APERTE G", 320, 430);
+              graficos.drawImage((Image) new ImageIcon("res//start.jpg").getImage(),0, 0, null);
+              graficos.drawString("DESVIE DAS PEDRAS E ARVORES ENQUANTO RECOLHE O LIXO NA FLORESTA!", 300, 100);
+              graficos.drawString("Arvores causam dano total e pedras retiram 1 ponto de vida!", 370, 150);
+              graficos.drawString("ESCOLHA SEU AVATAR", 520, 290);
+              graficos.drawImage((Image) new ImageIcon("res//bike1.gif").getImage(),800, 350, null);
+              graficos.drawString("APERTE B", 840, 600);
+              graficos.drawImage((Image) new ImageIcon("res//bike2.gif").getImage(),300, 350, null);
+              graficos.drawString("APERTE G", 320, 600);
             } 
             else {
                 ImageIcon fimJogo = new ImageIcon("res//game_over.jpg");
