@@ -16,11 +16,10 @@ public abstract class Objeto {
     protected static final int LARGURA_TELA = 1280;
     protected int velocidade;
 
-    protected int gerador;
-
     // Construtores
-    public Objeto(){
+    public Objeto(String path){
         this(100, 100, 2); // - posições x e y iniciais
+        gerarImagem(path); //instancia a referencia
     }
 
     public Objeto(int x, int y, int velocidade){
