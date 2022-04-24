@@ -6,7 +6,7 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 
-public class Lixo extends Objeto{
+public class Lixo extends Sprite{
 
     public Lixo(int x, int y, int velocidade){
         super(x, y, velocidade);

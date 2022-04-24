@@ -7,7 +7,7 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 
-public class Obstaculo extends Objeto{
+public class Obstaculo extends Sprite{
 
     //Atributos
     private int dano; // Qtd de vidas que o obstaculo irá tirar (ou recuperar) do player

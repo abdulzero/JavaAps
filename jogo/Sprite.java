@@ -1,32 +1,25 @@
-// Classe abstrata que será o molde para todos os objetos que se deslocam e interagem entre si
-
 package jogo;
 
 import javax.swing.ImageIcon;
 import java.awt.Image;
-import java.util.Random;
 import java.awt.Rectangle;
 
-public abstract class Objeto {
+public abstract class Sprite {
 
     protected Image imagem;
     protected int x, y;
     protected int largura, altura;
-    protected boolean isVisivel;
+    protected boolean visivel;
     protected static final int LARGURA_TELA = 1280;
     protected int velocidade;
 
-    // Construtores
-    public Objeto(String path){
-        this(100, 100, 2); // - posições x e y iniciais
-        gerarImagem(path); //instancia a referencia
-    }
+    // Construtor
 
-    public Objeto(int x, int y, int velocidade){
+    public Sprite(int x, int y, int velocidade){
         this.x = x;
         this.y = y;
         this.velocidade = velocidade;
-        isVisivel = true;
+        visivel = true;
     }
 
     // Métodos
@@ -48,11 +41,11 @@ public abstract class Objeto {
 
     }
     public boolean isVisivel() {
-        return isVisivel;
+        return visivel;
     }
 
     public void setVisivel(boolean isVisivel){
-        this.isVisivel = isVisivel;
+        this.visivel = isVisivel;
     }
 
     public Image getImagem() {

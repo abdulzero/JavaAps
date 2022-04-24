@@ -6,13 +6,14 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 
-public class Player extends Objeto{
+public class Player extends Sprite{
 
 	private int dx, dy; //movimentação
 	private int life; //variavel vida
 		
 	public Player(String path){ //constructor do jogador
-		super(path);
+		super(100, 100, 2);
+		gerarImagem(path);
 		life = 3;
 		
 		
