@@ -20,25 +20,19 @@ import java.awt.Font;
 public class Fase extends JPanel implements ActionListener{
 
     private int fase;
-    
     private Image fundo;
     private Player player;
     private Timer timer;
-
-    private boolean venceu, emJogo, iniciou;
-
-    private List<Lixo> lixos;
-
     private String avatar;
-
+    public static final int LARGURA_TELA = 1265;
+    public static final int ALTURA_TELA = 659;
+    private boolean venceu, emJogo, iniciou;
+    private List<Lixo> lixos;
     private List<Obstaculo> obstaculos;
-
     private int[][] coordenadas2 = 
-     {{20,450},{300, 480}, {320, 1000}, {500, 564}, {600,350},{750, 900}, {900,1}, {950, 500}, {1100, 320}, {950, 100}, {750, 200},
+    {{20,450},{300, 480}, {320, 1000}, {500, 564}, {600,350},{750, 900}, {900,1}, {950, 500}, {1100, 320}, {950, 100}, {750, 200},
      {600,30},{100,200}, {500,256}
-};
-
-
+    };
     // cords dos lixos
     private int[][] coordenadas = {
         {20,300},
@@ -133,7 +127,7 @@ public class Fase extends JPanel implements ActionListener{
 
         } else {
             if(venceu){
-               System.out.println("ok");
+               //System.out.println("ok");
                graficos.drawString("VOCÊ VENCEU!! APERTE ENTER E VÁ PARA PRÓXIMA FASE!", 5, 20);
             }
             else if (iniciou == false){

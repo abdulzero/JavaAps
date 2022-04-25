@@ -64,5 +64,6 @@ public class ContainerDeJanelas extends JFrame{
 	
 	public static void main(String[] args) {
 		new ContainerDeJanelas();
-	}
+
+	}	
 }
