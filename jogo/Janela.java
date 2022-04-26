@@ -1,10 +1,8 @@
 // import das bibliotecas
 package jogo;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -15,11 +13,11 @@ import javax.swing.JSeparator;
 
 // classe que vai gerar a janela do jogo
 
-public class ContainerDeJanelas extends JFrame{
+public class Janela extends JFrame{
 	
 
     // constructor 
-	public ContainerDeJanelas() {
+	public Janela() {
 
 		JMenuBar barraMenu = new JMenuBar();
 		
@@ -34,22 +32,19 @@ public class ContainerDeJanelas extends JFrame{
 				JOptionPane.showMessageDialog(null, "Jogo da turma CC2P04", "INFOS", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-		
+
 		JMenuItem sair = new JMenuItem("Sair");
 		sair.addActionListener(new ActionListener(){
 			
 			public void actionPerformed(ActionEvent e){
 				System.exit(0);
 			}
-		});
-		
+		});	
 		
 		menu.add(sobre);
 		menu.add(new JSeparator());
-		menu.add(sair);
-		
+		menu.add(sair);	
 		barraMenu.add(menu);
-		
 		setJMenuBar(barraMenu);
         add(new Fase());
 		setTitle("Jogo APS");
@@ -63,8 +58,9 @@ public class ContainerDeJanelas extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		new ContainerDeJanelas();
-
+		new Janela();
 		
+
+
 	}	
 }

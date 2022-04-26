@@ -30,10 +30,10 @@ public class Fase extends JPanel implements ActionListener{
     private List<Lixo> lixos;
     private List<Obstaculo> obstaculos;
     private int[][] coordenadas2 = 
-    {{20,450},{300, 480}, {320, 1000}, {500, 564}, {600,350},{750, 900}, {900,1}, {950, 500}, {1100, 320}, {950, 100}, {750, 200},
-     {600,30},{100,200}, {500,256}
+    {{20,450},{300, 480}, {320, 1000}, {500, 564}, {600,350},
+     {750, 900}, {900,1}, {950, 500}, {1100, 320}, {950, 100}, 
+     {750, 200}, {600,30}, {100,200}, {500,256}
     };
-    // cords dos lixos
     private int[][] coordenadas = {
         {20,300},
         {400,200},
@@ -170,11 +170,9 @@ public class Fase extends JPanel implements ActionListener{
             }
         }
 
-
         player.mexer();
         checarColisoes();
         repaint();
-
     }
 
     public void checarColisoes(){
@@ -183,34 +181,27 @@ public class Fase extends JPanel implements ActionListener{
         Rectangle formaLixo;
         Rectangle formaObstaculo;
 
-        for(int i = 0; i < lixos.size(); i++){
-            
-            Lixo tempLixo = lixos.get(i);
-            formaLixo = tempLixo.getBounds();
-
+        for(Lixo lixo: lixos){
+            formaLixo = lixo.getBounds();
             if(formaPlayer.intersects(formaLixo)){
-                tempLixo.setVisivel(false);
+                lixo.setVisivel(false);
             }
-
-
         }
 
-        for(int i = 0; i < obstaculos.size(); i++){
+        for(Obstaculo obst: obstaculos){
             
-            Obstaculo tempObstaculo = obstaculos.get(i);
-            formaObstaculo = tempObstaculo.getBounds();
+            formaObstaculo = obst.getBounds();
 
             if(formaPlayer.intersects(formaObstaculo)){
-                player.setLife(player.getLife()- tempObstaculo.getDano());
+                player.setLife(player.getLife()- obst.getDano());
                 player.setImagem(player.getLife());
                 if(player.getLife() < 1){
                     player.setVisivel(false);
                     emJogo = false;
                 }
-                tempObstaculo.setVisivel(false);
+                obst.setVisivel(false);
 
             }
-
 
         }
     }
