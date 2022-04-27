@@ -21,7 +21,7 @@ public abstract class Sprite {
     public void mexer(){
 
         if(this.x < 0){
-            this.x = Fase.LARGURA_TELA;
+            this.x = Fase.LARGURA_TELA + 200;
         } else {
             this.x -= velocidade;
         }
