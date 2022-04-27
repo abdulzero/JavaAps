@@ -16,7 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import java.awt.Font;
 
-
 public class Fase extends JPanel implements ActionListener{
 
     private int fase;

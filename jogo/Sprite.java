@@ -5,7 +5,6 @@ import java.awt.Image;
 import java.awt.Rectangle;
 
 public abstract class Sprite {
-
     protected Image imagem;
     protected int x, y;
     protected int largura, altura;
