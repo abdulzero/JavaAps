@@ -1,4 +1,3 @@
-// import das bibliotecas
 package jogo;
 
 import java.awt.event.ActionEvent;
@@ -10,13 +9,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 
-
-// classe que vai gerar a janela do jogo
-
 public class Janela extends JFrame{
 	
-
-    // constructor 
 	public Janela() {
 
 		JMenuBar barraMenu = new JMenuBar();

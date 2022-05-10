@@ -48,7 +48,7 @@ public class Fase extends JPanel implements ActionListener{
 
     public Fase(){
 
-        fase = 1; // O nivel da fase está correlacionado com a velocidade dos objetos;
+        fase = 1;
         setFocusable(true);
         setDoubleBuffered(true);
         addKeyListener(new TecladoAdapter());
@@ -114,7 +114,6 @@ public class Fase extends JPanel implements ActionListener{
 
         } else {
             if(venceu){
-               //System.out.println("ok");
                graficos.drawString("VOCÊ VENCEU!! APERTE ENTER E VÁ PARA PRÓXIMA FASE!", 5, 20);
             }
             else if (iniciou == false){
@@ -136,7 +135,6 @@ public class Fase extends JPanel implements ActionListener{
         }
 
         g.dispose();
-        // limpa a tela
     }
 
     @Override
@@ -220,9 +218,9 @@ public class Fase extends JPanel implements ActionListener{
                 }
                 
             }
-			else if(!emJogo /*&& iniciou*/){
+			else if(!emJogo){
                 if(code == KeyEvent.VK_ENTER){
-                    fase = (venceu)? ++fase: 1; // A cada vitoria a haverá um incremento na fase, caso perca, a fase irá retornar para 1 (a fase influencia na velocidade dos obstaculos e do lixo)
+                    fase = (venceu)? ++fase: 1;
                     inicializaLixos();
                     inicializaObstaculos();
                     iniciou = true;

@@ -4,8 +4,8 @@ import java.awt.event.KeyEvent;
 
 public class Player extends Sprite{
 
-	private int dx, dy; //movimentação
-	private int life; //variavel vida
+	private int dx, dy; 
+	private int life; 
 		
 	public Player(String path){ 
 		super(100, 100, 2);
@@ -14,28 +14,27 @@ public class Player extends Sprite{
 	}
 
 	@Override
-	public void mexer(){ //metodo da movimentação
+	public void mexer()
+	{ 
 		x += (x + dx < 0 | x + dx > Fase.LARGURA_TELA - this.largura)? 0: dx;
 		y += (y + dy < 0 | y + dy > Fase.ALTURA_TELA - this.altura)? 0: dy; 
-		//dx e dy são os comandos do teclado	
 	}
 
 
-	// Getters e setters
 	public int getLife(){
 		return life;
 	}
 	
 	public void setLife(int life){
         this.life = life;
-		if(this.life > 3){ // Teto de vida
+		if(this.life > 3){
 			this.life = 3;
 		}
 		setImagem();
 	}
 
 	private void setImagem() {
-		int area = 60 - ((3 - this.life) * 5); // Fórmula do tamanho
+		int area = 60 - ((3 - this.life) * 5);
 		imagem = imagem.getScaledInstance(area, area, imagem.SCALE_DEFAULT);
 		altura = largura = area;
 

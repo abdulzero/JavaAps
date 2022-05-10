@@ -28,18 +28,16 @@ public abstract class Sprite {
     }
 
     public void gerarImagem(String path){
-        ImageIcon referencia = new ImageIcon(path); //instancia a referencia da imagem
-		this.imagem = referencia.getImage(); //atribui a imagem referenciada
+        ImageIcon referencia = new ImageIcon(path); 
+		this.imagem = referencia.getImage(); 
         this.largura = imagem.getWidth(null);
         this.altura = imagem.getHeight(null);      
     }
 
-     // tratar colisão vida etc
-     public Rectangle getBounds(){
+    public Rectangle getBounds(){
         return new Rectangle(x, y, largura, altura);
     }
 
-    // Getters e setters
     public boolean isVisivel() {
         return visivel;
     }
