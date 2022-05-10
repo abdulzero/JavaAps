@@ -31,9 +31,10 @@ public class Player extends Sprite{
 		if(this.life > 3){ // Teto de vida
 			this.life = 3;
 		}
+		setImagem();
 	}
 
-	public void setImagem() {
+	private void setImagem() {
 		int area = 60 - ((3 - this.life) * 5); // Fórmula do tamanho
 		imagem = imagem.getScaledInstance(area, area, imagem.SCALE_DEFAULT);
 		altura = largura = area;
