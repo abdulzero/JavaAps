@@ -1,91 +1,64 @@
 package jogo;
 
-import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
-import javax.swing.ImageIcon;
-
-public class Player extends Objeto{
+public class Player extends Sprite{
 
 	private int dx, dy; //movimentação
 	private int life; //variavel vida
 		
-	public Player(String path){ //constructor do jogador
-		super(path);
-		life = 3;
-		
-		
+	public Player(String path){ 
+		super(100, 100, 2);
+		gerarImagem(path);
+		life = 3;		
 	}
 
-	public int getLife(){ //metodo que retorna a vida
+	@Override
+	public void mexer(){ //metodo da movimentação
+		x += (x + dx < 0 | x + dx > Fase.LARGURA_TELA - this.largura)? 0: dx;
+		y += (y + dy < 0 | y + dy > Fase.ALTURA_TELA - this.altura)? 0: dy; 
+		//dx e dy são os comandos do teclado	
+	}
+
+
+	// Getters e setters
+	public int getLife(){
 		return life;
 	}
-
-	public void setLife(int life){ //metodo que seta a vida
+	
+	public void setLife(int life){
         this.life = life;
 		if(this.life > 3){ // Teto de vida
 			this.life = 3;
 		}
-	}
-	
-	@Override // Comportamente polimorfico
-	public void mexer(){ //metodo da movimentação
-
-		x += dx;
-		y += dy; //dx e dy são os comandos do jogador atribuidos a variavel de sua posição 
-
-        // System.out.println(this.x + "," + this.y); 
-		// a seguir, validação se o personagem exceder o limite da tela:
-
-		if(this.x < 1){ 
-			x = 1;
-		}
-		
-		if(this.x > 1220){
-			x = 1220;
-		}
-		
-		if(this.y < 1){
-			y = 1;
-		}
-
-		if(this.y > 600){
-			y = 600;
-		}
-
-		// ends 
-		
+		setImagem();
 	}
 
-
-	public void setImagem(int status) {
-		// classe que muda o tamanho do personagem caso ele perca vida, por enquanto ele só perde, add depois ganho
-		int area = 70 - ((5 - status) * 5); // Fórmula do tamanho
+	private void setImagem() {
+		int area = 60 - ((3 - this.life) * 5); // Fórmula do tamanho
 		imagem = imagem.getScaledInstance(area, area, imagem.SCALE_DEFAULT);
+		altura = largura = area;
+
 	}
 	
 	
 	public void keyPressed(KeyEvent tecla){
-		
-		int codigo = tecla.getKeyCode();
-		
-		if(codigo == KeyEvent.VK_UP){
-			dy = velocidade * -1;
-		}
-		
-		if(codigo == KeyEvent.VK_DOWN){
-			dy = velocidade;
-		}
-		
-		if(codigo == KeyEvent.VK_LEFT){
-			dx = velocidade *-1;
-		}
-		
-		if(codigo == KeyEvent.VK_RIGHT){
-			dx = velocidade;
-		}
-		
+
+		switch(tecla.getKeyCode()){
+			case KeyEvent.VK_UP:
+				dy = velocidade * -1;
+				break;
+			case KeyEvent.VK_DOWN:
+				dy = velocidade;
+				break;
+			case KeyEvent.VK_LEFT:
+				dx = velocidade *-1;
+				break;
+			case KeyEvent.VK_RIGHT:
+				dx = velocidade;
+				break;
+			}	
+			
 	}
 	
 	public void keyReleased(KeyEvent tecla){
@@ -95,8 +68,7 @@ public class Player extends Objeto{
 		if(codigo == KeyEvent.VK_UP || codigo == KeyEvent.VK_DOWN){
 			dy = 0;
 		}
- 
-		
+
 		if(codigo == KeyEvent.VK_LEFT || codigo == KeyEvent.VK_RIGHT){
 			dx = 0;
 		}
